@@ -49,6 +49,15 @@
   #define AMP_BYPASS_EN		P2_3
 #endif
 
+#ifdef RFCAT_SRFSTICK
+  #define LED1 			P1_5
+  #define LED2 			P1_6
+  #define LED3 			P1_7
+  #define LED_MASK		((1<<7)|(1<<6)|(1<<5))
+  #define USB_ENABLE		P2_0
+  #define USB_MASK		0x01
+#endif
+
 void setup_led();
 void led_on();
 void led_off();
