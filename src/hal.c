@@ -54,7 +54,7 @@ void setup_gpio() {
 }
 
 void led_on() {
-#ifdef RFCAT_YARDSTICKONE
+#if defined(RFCAT_YARDSTICKONE) || defined(RFCAT_SRFSTICK)
   LED1 = 1;
   LED2 = 1;
   LED3 = 1;
@@ -64,7 +64,7 @@ void led_on() {
 }
 
 void led_off() {
-#ifdef RFCAT_YARDSTICKONE
+#if defined(RFCAT_YARDSTICKONE) || defined(RFCAT_SRFSTICK)
   LED1 = 0;
   LED2 = 0;
   LED3 = 0;
@@ -75,12 +75,20 @@ void led_off() {
 
 void usb_up() {
   // Bring up the USB link
+#ifdef RFCAT_SRFSTICK
+  P2DIR |= USB_MASK;
+#else
   P1DIR |= USB_MASK;
+#endif
   USB_ENABLE = 1;
 }
 
 void usb_down() {
   // Bring down the USB link
   USB_ENABLE = 0;
+#ifdef RFCAT_SRFSTICK
+  P2DIR &= ~USB_MASK;
+#else
   P1DIR &= ~USB_MASK;
+#endif
 }
